@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login ·Hostel Complaint Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    .login-page-wrap {
+      min-height: calc(100vh - 160px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+    .login-card {
+      background: linear-gradient(180deg, #0e1631, #0b1224);
+      border: 1px solid #1a2750;
+      border-radius: 20px;
+      padding: 40px 36px;
+      width: min(440px, 100%);
+      box-shadow: 0 20px 60px rgba(0,0,0,.45);
+    }
+    .login-card h1 {
+      font-size: 26px;
+      margin: 0 0 6px;
+      text-align: center;
+    }
+    .login-card .subtitle {
+      color: var(--muted);
+      text-align: center;
+      margin: 0 0 28px;
+      font-size: 14px;
+    }
+    .role-tabs {
+      display: flex;
+      background: #080f23;
+      border-radius: 12px;
+      padding: 4px;
+      margin-bottom: 24px;
+      gap: 4px;
+    }
+    .role-tab {
+      flex: 1;
+      padding: 9px 6px;
+      border-radius: 9px;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .2s;
+      font-family: Inter, sans-serif;
+      width: auto;
+      margin: 0;
+    }
+    .role-tab.active {
+      background: linear-gradient(135deg, #111a38, #0f1a3a);
+      color: var(--text);
+      box-shadow: 0 0 0 1px #1c2952 inset;
+    }
+    .hint-box {
+      background: #080f23;
+      border: 1px solid #1a2750;
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 20px;
+      font-size: 13px;
+      color: #94a3b8;
+      line-height: 1.7;
+    }
+    .hint-box strong { color: #e2e8f0; }
+    .login-form { display: grid; gap: 14px; }
+    .login-form .form-field label { display: block; margin-bottom: 6px; font-size: 14px; font-weight: 500; }
+    .login-form .form-field input,
+    .login-form .form-field select {
+      width: 100%;
+      background: #0d1630;
+      border: 1px solid #1b2750;
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 12px;
+      outline: none;
+      font-family: Inter, sans-serif;
+      font-size: 14px;
+      margin: 0;
+    }
+    .login-form .form-field input:focus,
+    .login-form .form-field select:focus {
+      box-shadow: 0 0 0 4px rgba(99,102,241,.35);
+      border-color: #2a3f86;
+    }
+    .login-form .error { color: #fca5a5; min-height: 18px; display: block; margin-top: 4px; font-size: 13px; }
+    .login-submit {
+      background: linear-gradient(135deg, var(--brand), var(--brand-2));
+      border: none;
+      border-radius: 12px;
+      color: #fff;
+      padding: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 4px;
+      font-family: Inter, sans-serif;
+      transition: opacity .2s;
+    }
+    .login-submit:hover { opacity: .88; transform: translateY(-1px); }
+    #loginStatus {
+      display: block;
+      text-align: center;
+      font-size: 14px;
+      min-height: 20px;
+      margin-top: 4px;
+      color: #86efac;
+    }
+
+    /* Logged-in state */
+    .logged-in-card {
+      text-align: center;
+      padding: 10px 0 4px;
+    }
+    .user-avatar {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--brand), var(--brand-2));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px;
+      margin: 0 auto 16px;
+    }
+    .user-name { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+    .user-role { color: var(--muted); font-size: 13px; margin-bottom: 24px; }
+    .logout-btn {
+      background: rgba(239,68,68,.15);
+      border: 1px solid rgba(239,68,68,.4);
+      color: #fca5a5;
+      border-radius: 12px;
+      padding: 10px 28px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: Inter, sans-serif;
+      width: auto;
+      transition: all .2s;
+    }
+    .logout-btn:hover { background: rgba(239,68,68,.25); }
+    .quick-links {
+      display: flex; gap: 10px; justify-content: center; margin-top: 20px; flex-wrap: wrap;
+    }
+    .quick-links a {
+      color: #94a3b8; font-size: 13px; text-decoration: none;
+      padding: 7px 14px; border: 1px solid #1b2750; border-radius: 10px;
+      transition: all .2s;
+    }
+    .quick-links a:hover { color: var(--text); border-color: #2a3f86; }
+  </style>
+</head>
+
+<body>
+<header class="site-header">
+  <div class="container header-wrap">
+    <a class="brand" href="index.html">
+      <span class="brand-logo" aria-hidden="true"></span>
+      <span class="brand-text">Hostel Complaint Management</span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    <nav class="nav" id="siteNav">
+      <a href="index.html" data-nav="home">Dashboard</a>
+      <a href="submit.html" data-nav="submit">Submit Complaint</a>
+      <a href="my-complaints.html" data-nav="mine">My Complaints</a>
+      <a href="login.html" data-nav="login">Login</a>
+    </nav>
+  </div>
+</header>
+
+<main class="login-page-wrap">
+  <div class="login-card">
+
+   
+    <div id="loginSection">
+      <h1>Welcome Back</h1>
+      <p class="subtitle">Sign in to manage and track your complaints.</p>
+
+      <div class="role-tabs">
+        <button class="role-tab active" data-role="student" onclick="switchRole('student', this)">Student</button>
+        <button class="role-tab" data-role="warden" onclick="switchRole('warden', this)">Warden</button>
+        <button class="role-tab" data-role="admin" onclick="switchRole('admin', this)">Admin</button>
+      </div>
+
+      <div class="hint-box" id="hintBox">
+        <strong>Student login:</strong> Use any ID starting with <strong>PP</strong> (e.g. <code>PP23CSE001</code>) and any password.
+      </div>
+
+      <form class="login-form" id="loginForm" novalidate>
+        <input type="hidden" id="loginRole" name="loginRole" value="student" />
+
+        <div class="form-field" id="hostelFieldWrap" style="display:none">
+          <label for="loginHostel">Assigned Hostel</label>
+          <select id="loginHostel" name="loginHostel">
+            <option value="">Select hostel</option>
+            <option>Girls Hostel</option>
+            <option>Boys Hostel</option>
+            <option>Guest Hostel</option>
+          </select>
+          <small class="error" data-error-for="loginHostel"></small>
+        </div>
+
+        <div class="form-field">
+          <label for="loginId" id="loginIdLabel">Student ID</label>
+          <input id="loginId" name="loginId" type="text" placeholder="e.g. PP23CSE001" autocomplete="username" />
+          <small class="error" data-error-for="loginId"></small>
+        </div>
+
+        <div class="form-field">
+          <label for="loginPassword">Password</label>
+          <input id="loginPassword" name="loginPassword" type="password" placeholder="Enter any password" autocomplete="current-password" />
+          <small class="error" data-error-for="loginPassword"></small>
+        </div>
+
+        <button type="submit" class="login-submit">Sign In</button>
+        <span id="loginStatus" role="status" aria-live="polite"></span>
+      </form>
+    </div>
+
+    
+    <div id="loggedInSection" style="display:none">
+      <div class="logged-in-card">
+        <div class="user-avatar" id="userAvatar"></div>
+        <div class="user-name" id="userNameDisplay"></div>
+        <div class="user-role" id="userRoleDisplay"></div>
+        <button class="logout-btn" onclick="doLogout()">Sign Out</button>
+        <div class="quick-links" id="quickLinks"></div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <h4>Hostels</h4>
+      <p>Student-first complaint redressal for Girls, Boys, and Guest hostels.</p>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="submit.html">Submit Complaint</a></li>
+        <li><a href="my-complaints.html">My Complaints</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Support</h4>
+      <ul class="contact-list">
+        <li>masenkanepulane@gmail.com</li>
+        <li>+91-9815729600</li>
+       
+      </ul>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <small>© 2025  Hostel Complaint Management.</small>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+  const AUTH_ROLE_KEY = 'pcte_auth_role';
+  const AUTH_ID_KEY   = 'pcte_auth_id';
+
+  const HINTS = {
+    student: '<strong>Student login:</strong> Use any ID starting with <strong>PP</strong> (e.g. <code>PP23CSE001</code>) and any password.',
+    warden:  '<strong>Warden login:</strong> Use <code>GIRLS-WARDEN</code>, <code>BOYS-WARDEN</code>, or <code>GUEST-WARDEN</code> and any password.',
+    admin:   '<strong>Admin login:</strong> Use <code>ADMIN-PP</code> and any password.'
+  };
+
+  const ROLE_LABELS = { student:'Student ID', warden:'Warden ID', admin:'Admin ID' };
+  const ROLE_PLACEHOLDERS = { student:'e.g. PP23CSE001', warden:'e.g. BOYS-WARDEN', admin:'ADMIN-PP' };
+  const AVATARS = { student:'', warden:'', admin:'' };
+
+  function switchRole(role, btn) {
+    document.getElementById('loginRole').value = role;
+    document.querySelectorAll('.role-tab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('hintBox').innerHTML = HINTS[role];
+    document.getElementById('loginIdLabel').textContent = ROLE_LABELS[role];
+    document.getElementById('loginId').placeholder = ROLE_PLACEHOLDERS[role];
+    document.getElementById('hostelFieldWrap').style.display = role === 'warden' ? 'block' : 'none';
+    clearErrors();
+  }
+
+  function clearErrors() {
+    document.querySelectorAll('.error').forEach(e => e.textContent = '');
+    document.getElementById('loginStatus').textContent = '';
+  }
+
+  function showError(name, msg) {
+    const el = document.querySelector(`[data-error-for="${name}"]`);
+    if (el) el.textContent = msg || '';
+  }
+
+  function showLoggedIn(auth) {
+    document.getElementById('loginSection').style.display = 'none';
+    document.getElementById('loggedInSection').style.display = 'block';
+    document.getElementById('userAvatar').textContent = AVATARS[auth.role] || '';
+    document.getElementById('userNameDisplay').textContent = auth.id;
+    const roleLabel = auth.role.charAt(0).toUpperCase() + auth.role.slice(1);
+    const hostelSuffix = auth.hostel ? ' · ' + auth.hostel : '';
+    document.getElementById('userRoleDisplay').textContent = roleLabel + hostelSuffix;
+
+    const ql = document.getElementById('quickLinks');
+    if (auth.role === 'student') {
+      ql.innerHTML = `<a href="submit.html">Submit Complaint</a><a href="my-complaints.html">My Complaints</a>`;
+    } else {
+      ql.innerHTML = `<a href="manage.html">Manage Complaints</a><a href="index.html">Dashboard</a>`;
+    }
+
+    
+    const navLogin = document.querySelector('.nav a[data-nav="login"]');
+    if (navLogin) navLogin.textContent = auth.id.split('-')[0].slice(0, 12) + ' ▾';
+  }
+
+  function doLogout() {
+    localStorage.removeItem(AUTH_ROLE_KEY);
+    localStorage.removeItem(AUTH_ID_KEY);
+    document.getElementById('loginSection').style.display = 'block';
+    document.getElementById('loggedInSection').style.display = 'none';
+    document.getElementById('loginId').value = '';
+    document.getElementById('loginPassword').value = '';
+    const navLogin = document.querySelector('.nav a[data-nav="login"]');
+    if (navLogin) navLogin.textContent = 'Login';
+  }
+
+
+  (function init() {
+    const role = localStorage.getItem(AUTH_ROLE_KEY);
+    const id   = localStorage.getItem(AUTH_ID_KEY);
+    if (role && id) {
+      const hostel = localStorage.getItem('pp_auth_hostel') || '';
+      showLoggedIn({ role, id, hostel });
+      return;
+    }
+   
+    const urlRole = new URLSearchParams(location.search).get('role');
+    if (urlRole) {
+      const tab = document.querySelector(`.role-tab[data-role="${urlRole}"]`);
+      if (tab) switchRole(urlRole, tab);
+    }
+  })();
+
+  // Form submission
+  document.getElementById('loginForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    clearErrors();
+
+    const role     = document.getElementById('loginRole').value;
+    const id       = document.getElementById('loginId').value.trim().toUpperCase();
+    const password = document.getElementById('loginPassword').value.trim();
+    const hostel   = document.getElementById('loginHostel').value;
+
+    let valid = true;
+
+    if (!id) { showError('loginId', 'Enter your ID'); valid = false; }
+    if (!password) { showError('loginPassword', 'Enter your password'); valid = false; }
+    if (!valid) return;
+
+    
+    let ok = false;
+    if (role === 'student') ok = /^PP[\w-]+/i.test(id);
+    if (role === 'warden')  ok = /^(GIRLS|BOYS|GUEST)-WARDEN$/i.test(id);
+    if (role === 'admin')   ok = /^ADMIN-PP$/i.test(id);
+
+    if (!ok) {
+      showError('loginId', 'ID does not match the selected role. Check the hint above.');
+      return;
+    }
+    if (role === 'warden' && !hostel) {
+      showError('loginHostel', 'Select your assigned hostel');
+      return;
+    }
+
+   
+    localStorage.setItem(AUTH_ROLE_KEY, role);
+    localStorage.setItem(AUTH_ID_KEY, id);
+    if (hostel) localStorage.setItem('pp_auth_hostel', hostel);
+    if (role === 'student') localStorage.setItem('pp_last_student', id);
+
+    document.getElementById('loginStatus').textContent = 'Login successful! Redirecting…';
+
+    const redirect = new URLSearchParams(location.search).get('redirect') || 'index.html';
+    setTimeout(() => { location.href = redirect; }, 900);
+  });
+</script>
+</body>
+</html>

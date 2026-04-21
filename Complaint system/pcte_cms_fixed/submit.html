@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Submit Complaint ·Hostel Complaint Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body>
+<header class="site-header">
+  <div class="container header-wrap">
+    <a class="brand" href="index.html">
+      <span class="brand-logo" aria-hidden="true"></span>
+      <span class="brand-text">Hostel Complaint Management</span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    <nav class="nav" id="siteNav">
+      <a href="index.html" data-nav="home">Dashboard</a>
+      <a href="submit.html" data-nav="submit">Submit Complaint</a>
+      <a href="my-complaints.html" data-nav="mine">My Complaints</a>
+      <a href="login.html" data-nav="login" id="navLoginLink">Login</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container page">
+  <h1>Submit Complaint</h1>
+  <form class="contact-form" id="submitForm" novalidate>
+    <div class="grid-2">
+      <div class="form-field">
+        <label for="studentId">Student ID</label>
+        <input id="studentId" name="studentId" type="text" placeholder="e.g., PP23CSE001" required />
+        <small class="error" data-error-for="studentId"></small>
+      </div>
+      <div class="form-field">
+        <label for="hostel">Hostel</label>
+        <select id="hostel" name="hostel" required>
+          <option value="">Select hostel</option>
+          <option>Girls Hostel</option>
+          <option>Boys Hostel</option>
+          <option>Guest Hostel</option>
+        </select>
+        <small class="error" data-error-for="hostel"></small>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="form-field">
+        <label for="room">Room No.</label>
+        <input id="room" name="room" type="text" placeholder="e.g., B-205" required />
+        <small class="error" data-error-for="room"></small>
+      </div>
+      <div class="form-field">
+        <label for="category">Category</label>
+        <select id="category" name="category" required>
+          <option value="">Select category</option>
+          <option>Electricity</option>
+          <option>Plumbing</option>
+          <option>Cleanliness</option>
+          <option>Wi‑Fi/Internet</option>
+          <option>Security</option>
+          <option>Other</option>
+        </select>
+        <small class="error" data-error-for="category"></small>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="form-field">
+        <label for="urgency">Urgency</label>
+        <select id="urgency" name="urgency">
+          <option>Low</option>
+          <option>Medium</option>
+          <option>High</option>
+          <option>Emergency</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label for="email">Email (optional)</label>
+        <input id="email" name="email" type="email" placeholder="you@pP.edu" />
+        <small class="error" data-error-for="email"></small>
+      </div>
+    </div>
+    <div class="form-field">
+      <label for="title">Title</label>
+      <input id="title" name="title" type="text" placeholder="Short summary" required />
+      <small class="error" data-error-for="title"></small>
+    </div>
+    <div class="form-field">
+      <label for="description">Description</label>
+      <textarea id="description" name="description" rows="5" placeholder="Explain the issue with specifics (location, time, impact)..." required></textarea>
+      <small class="error" data-error-for="description"></small>
+    </div>
+    <div class="grid-2">
+      <label class="form-field checkbox">
+        <input type="checkbox" id="anonymous" name="anonymous" aria-label="Submit anonymously" />
+        Submit anonymously (still visible to staff; your student ID will be hidden to others).
+      </label>
+      <div class="form-field">
+        <label for="image">Attach photo (optional)</label>
+        <input id="image" name="image" type="file" accept="image/*" />
+      </div>
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-primary" type="submit">Submit</button>
+      <span id="submitStatus" role="status" aria-live="polite"></span>
+    </div>
+  </form>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <h4>Hostels</h4>
+      <p>Student-first complaint redressal for Girls, Boys, and Guest hostels.</p>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="submit.html">Submit Complaint</a></li>
+        <li><a href="my-complaints.html">My Complaints</a></li>
+       
+      </ul>
+    </div>
+    <div>
+      <h4>Support</h4>
+      <ul class="contact-list">
+        <li>masenkanepulane@gmail.com</li>
+        <li>+91-9815729600</li>
+      
+      </ul>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <small>© 2025 Hostel Complaint Management. </small>
+  </div>
+</footer>
+<script src="js/main.js"></script>
+</body>
+</html>

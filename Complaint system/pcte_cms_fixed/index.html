@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard · Hostel Assist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body>
+<header class="site-header">
+  <div class="container header-wrap">
+    <a class="brand" href="index.html">
+      
+      <span class="brand-text">Hostel Complaint Management</span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    <nav class="nav" id="siteNav">
+      <a href="index.html" data-nav="home">Dashboard</a>
+      <a href="submit.html" data-nav="submit">Submit Complaint</a>
+      <a href="my-complaints.html" data-nav="mine">My Complaints</a>
+      <a href="login.html" data-nav="login" id="navLoginLink">Login</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="container hero-wrap">
+      <div class="hero-copy">
+        <h1>Report issues in seconds. We’ll route them to the right hostel team.</h1>
+        <p>Choose your hostel (Girls, Boys, Guest), add details and urgency. Track progress as wardens resolve items.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="submit.html">Submit Complaint</a>
+          <a class="btn btn-outline" href="my-complaints.html">Track My Complaints</a>
+        </div>
+        
+        <ul class="hero-stats">
+          <li><strong id="statTotal">0</strong> Total</li>
+          <li><strong id="statOpen">0</strong> Open</li>
+          <li><strong id="statResolved">0</strong> Resolved</li>
+        </ul>
+      </div>
+  <div class="hero-art">
+  <div class="hostel-carousel" id="hostelCarousel" aria-label="PCTE Hostels">
+    <div class="carousel-track">
+      <div class="carousel-slide">
+        <img src="./images/girls_hostel.png" alt="Girls Hostel" />
+        <div class="caption">Girls Hostel</div>
+      </div>
+      <div class="carousel-slide">
+        <img src="./images/boys_hostel.png" alt="Boys Hostel" />
+        <div class="caption">Boys Hostel</div>
+      </div>
+      <div class="carousel-slide">
+        <img src="./images/guest_hostel.png" alt="Guest Hostel" />
+        <div class="caption">Guest Hostel</div>
+      </div>
+    </div>
+
+    <button class="carousel-btn prev" aria-label="Previous">‹</button>
+    <button class="carousel-btn next" aria-label="Next">›</button>
+    <div class="carousel-dots" aria-hidden="true"></div>
+  </div>
+</div>
+
+</div>
+
+    </div>
+  </section>
+  <section class="cards container">
+    <h2 class="section-title">By Hostel</h2>
+    <div class="grid-3" id="byHostel"></div>
+  </section>
+  <section class="cards container">
+    <h2 class="section-title">Recent Complaints</h2>
+    <div class="grid-3" id="recentList"></div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <h4>Hostels</h4>
+      <p>Student-first complaint redressal for Girls, Boys, and Guest hostels.</p>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="submit.html">Submit Complaint</a></li>
+        <li><a href="my-complaints.html">My Complaints</a></li>
+        
+        
+      </ul>
+    </div>
+    <div>
+      <h4>Support</h4>
+      <ul class="contact-list">
+        <li>masenkanepulane@gmail.com</li>
+        <li>+91-9815729600</li>
+        
+      </ul>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <small>© 2025 Hostel Complaint Management.</small>
+  </div>
+</footer>
+<script src="js/main.js"></script>
+</body>
+</html>
